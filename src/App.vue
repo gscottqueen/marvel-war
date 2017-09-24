@@ -112,9 +112,10 @@ $green: #41b883;
       max-width: 300px;
       max-height: 510px;
       margin: 40px 25px;
-      // padding-bottom: 80px;
+      //flex
       display: flex;
       flex-direction: column;
+      align-content: center;
       flex: 1 1 auto;
       //dropshadow
       -ms-box-shadow: 0px 0px 44px -21px rgba(0,0,0,0.48);
@@ -157,6 +158,7 @@ $green: #41b883;
         .character-name {
           font-family: "Impact", sans-serif;
           font-size: 20px;
+          text-transform: uppercase;
           color: white;
           padding: 20px;
         }
