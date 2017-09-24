@@ -1,8 +1,9 @@
-<!-- public key = a26ca9cb27a74fb7567e2dec06e44dc2 -->
+
 <template>
   <div id="app">
     <button type="button" name="button" @click="fetchData">Get Data<span class="carrot"></span></button>
     <div id="data-vue">
+      <bounce-loader :loading="loading" :color="color" :size="size"></bounce-loader>
       <div class="character-card" v-for="character in characters">
         <div class="character-name-wrapper">
           <div class="character-name">{{ character.name }}</div>
@@ -35,14 +36,22 @@
 <script>
 //import globals
 import {api} from './api.js';
+//setting a loader animation
+import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
 
 //our data
 export default {
   name: 'app',
+  components: {
+    BounceLoader,
+  },
   data() {
     return {
       characters: [],
       thumbnailSuffix: '/portrait_uncanny.jpg',
+      color: '#41b883',
+      loading: false,
+      size: '100px',
   };
 },
   methods: {
@@ -108,10 +117,10 @@ $green: #41b883;
       -moz-box-shadow: 0px 0px 44px -21px rgba(0,0,0,0.48);
       box-shadow: 0px 0px 44px -21px rgba(0,0,0,0.48);
       //our interactive css
-      -ms-transition: 0.5s;
-      -webkit-transition: 0.5s;
-      -moz-transition: 0.5s;
-      transition: 0.5s;
+      -ms-transition: .75s;
+      -webkit-transition: .75s;
+      -moz-transition: .75s;
+      transition: .75s;
 
       &:hover {
         cursor: url(assets/spideycursor.png), pointer;
