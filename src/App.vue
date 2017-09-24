@@ -51,7 +51,7 @@ export default {
       thumbnailSuffix: '/portrait_uncanny.jpg',
       color: '#41b883',
       loading: false,
-      size: '100px',
+      size: '150px',
   };
 },
   methods: {
