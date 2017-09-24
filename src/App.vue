@@ -3,31 +3,32 @@
   <div id="app">
     <button type="button" name="button" @click="fetchData">Get Data<span class="carrot"></span></button>
     <div id="data-vue">
-      <bounce-loader :loading="loading" :color="color" :size="size"></bounce-loader>
-      <div class="character-card" v-for="character in characters">
-        <div class="character-name-wrapper">
-          <div class="character-name">{{ character.name }}</div>
-        </div>
-        <img class="character-image" :src="thumbnailSrc(character.thumbnail.path)"></img>
-        <div class="character-description-wrapper">
-          <div class="character-description">
-            <div class="character-description-comics">{{ character.description }}</div>
-            <ul>
-              <li class="character-description-comics">
-                <span>Comics available: <span class="digit">{{ character.comics.available }}</span></span>
-              </li>
-              <li class="character-description-series">
-                <span>Series available: <span class="digit">{{ character.series.available }}</span>
+      <!-- <bounce-loader :loading="loading" :color="color" :size="size"> -->
+        <div class="character-card" v-for="character in characters">
+          <div class="character-name-wrapper">
+            <div class="character-name">{{ character.name }}</div>
+          </div>
+          <img class="character-image" :src="thumbnailSrc(character.thumbnail.path)"></img>
+          <div class="character-description-wrapper">
+            <div class="character-description">
+              <div class="character-description-comics">{{ character.description }}</div>
+              <ul>
+                <li class="character-description-comics">
+                  <span>Comics available: <span class="digit">{{ character.comics.available }}</span></span>
+                </li>
+                <li class="character-description-series">
+                  <span>Series available: <span class="digit">{{ character.series.available }}</span>
+                  </span>
+                </li>
+                <li class="character-description-stories">
+                  <span>Stories available: <span class="digit">{{ character.stories.available }}</span>
                 </span>
-              </li>
-              <li class="character-description-stories">
-                <span>Stories available: <span class="digit">{{ character.stories.available }}</span>
-              </span>
-              </li>
-            </ul>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
+      <!-- </bounce-loader> -->
     </div>
   </div>
 </template>
@@ -57,14 +58,18 @@ export default {
   methods: {
     fetchData() {
 
-      api.get('/v1/public/characters?orderBy=name&offset=38')
+      api.get('/v1/public/characters?orderBy=name&offset=100')
       .then(characterResponse => {
         console.log(characterResponse);
 
         var characters = characterResponse.data.data.results;
+        var noImage = 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available';
 
         for (var i=0; i<characters.length; i++) {
-          this.characters.push(characters[i]);
+
+          if (characters[i].thumbnail.path != noImage) {
+            this.characters.push(characters[i]);
+          }
         }
       })
     },
