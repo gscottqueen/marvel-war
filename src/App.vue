@@ -38,7 +38,7 @@
 //import globals
 import {api} from './api.js';
 //setting a loader animation
-import BounceLoader from 'vue-spinner/src/BounceLoader.vue'
+import BounceLoader from 'vue-spinner/src/BounceLoader.vue';
 
 //our data
 export default {
@@ -168,6 +168,8 @@ $green: #41b883;
       .character-image {
         width: 100%;
         height: 100%;
+        min-height: 350px;
+        // min-width: 350px;
       }
 
       .character-description-wrapper {
@@ -175,7 +177,7 @@ $green: #41b883;
         z-index: -1;
         background-color: white;
         height: 100%;
-        max-height: 450px;
+        min-height: 350px;
         width: 100%;
         max-width: 300px;
         display: none;
