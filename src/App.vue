@@ -8,7 +8,7 @@
           <div class="character-name-wrapper">
             <div class="character-name">{{ character.name }}</div>
           </div>
-          <img class="character-image" :src="thumbnailSrc(character.thumbnail.path)"></img>
+          <img class="character-image" :src="thumbnailSrc(character.thumbnail)"></img>
           <div class="character-description-wrapper">
             <div class="character-description">
               <div class="character-description-comics">{{ character.description }}</div>
@@ -49,7 +49,7 @@ export default {
   data() {
     return {
       characters: [],
-      thumbnailSuffix: '/portrait_uncanny.jpg',
+      thumbnailSuffix: '/portrait_uncanny',
       color: '#41b883',
       loading: false,
       size: '150px',
@@ -74,7 +74,7 @@ export default {
       })
     },
     thumbnailSrc(src) {
-      return src + this.thumbnailSuffix;
+      return src.path + this.thumbnailSuffix + "." + src.extension;
     }
   }
 }
