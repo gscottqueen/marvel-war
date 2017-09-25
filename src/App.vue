@@ -3,7 +3,7 @@
   <div id="app">
     <button type="button" name="button" @click="fetchData">Get Data<span class="carrot"></span></button>
     <div id="data-vue">
-      <!-- <bounce-loader :loading="loading" :color="color" :size="size"> -->
+      <dot-loader v-show="loading" :loading="laoding" :color="color" :size="size"></dot-loader>
         <div class="character-card" v-for="character in characters">
           <div class="character-name-wrapper">
             <div class="character-name">{{ character.name }}</div>
@@ -28,7 +28,6 @@
             </div>
           </div>
         </div>
-      <!-- </bounce-loader> -->
     </div>
   </div>
 </template>
@@ -38,47 +37,56 @@
 //import globals
 import {api} from './api.js';
 //setting a loader animation
-import BounceLoader from 'vue-spinner/src/BounceLoader.vue';
+import DotLoader from 'vue-spinner/src/DotLoader.vue';
 
 //our data
 export default {
   name: 'app',
   components: {
-    BounceLoader,
+    DotLoader,
   },
   data() {
     return {
       characters: [],
       thumbnailSuffix: '/portrait_uncanny',
       color: '#41b883',
+      size: '90px',
       loading: false,
-      size: '150px',
   };
 },
   methods: {
     fetchData() {
-
+      //turn our spinner on
+      this.loading = true;
+      // make a request to our endpoint
       api.get('/v1/public/characters?orderBy=name&offset=100')
       .then(characterResponse => {
-        console.log(characterResponse);
+        //log a response
+        // console.log(characterResponse);
 
+        // set up our variables
         var characters = characterResponse.data.data.results;
         var noImage = 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available';
 
+        // create and indexed array of the characters
         for (var i=0; i<characters.length; i++) {
-
+          //remove the returns with no images
           if (characters[i].thumbnail.path != noImage) {
+            // push the index to our data
             this.characters.push(characters[i]);
+            //turn our spinner off
+            this.loading = false;
           }
         }
       })
     },
+    // pass our src through to build our full path
     thumbnailSrc(src) {
+      // return the thumbnail pat add the suffix and close with the extension in data
       return src.path + this.thumbnailSuffix + "." + src.extension;
     }
   }
 }
-
 </script>
 
 <!-- our styles -->
@@ -177,7 +185,7 @@ $green: #41b883;
         z-index: -1;
         background-color: white;
         height: 100%;
-        min-height: 350px;
+        min-height: 440px;
         width: 100%;
         max-width: 300px;
         display: none;
