@@ -28,7 +28,7 @@
           </div>
         </div>
     </div>
-    <div class="load-more-wrapper" v-show="visibleLoadingWrapper">
+    <div class="load-more-wrapper">
       <dot-loader class="loading-spinner" :loading="loading" :color="color" :size="size"></dot-loader>
       <button type="button" name="button" @click="fetchMoreData" v-show="buttonVisible">Load More</button>
     </div>
@@ -116,7 +116,7 @@ $green: #41b883;
 .load-more-wrapper {
   display: flex;
   padding: 20px;
-  height: 80px;
+  height: 130px;
 }
 
 .on-loading-spinner {
