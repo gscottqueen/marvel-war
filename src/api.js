@@ -6,7 +6,7 @@ export const api = axios.create({
     "apikey": "a26ca9cb27a74fb7567e2dec06e44dc2",
     "limit" : "100"
   },
-    timeout: 5000,
+    timeout: 10000,
     method: 'get',
     responseType: 'json',
 });
