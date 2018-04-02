@@ -81,7 +81,7 @@ export default {
       .then(characterResponse => {
         // set up our variables
         var characters = characterResponse.data.data.results;
-        var noImage = 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available';
+        var noImage = '//i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available';
 
         // create and indexed array of the characters
         for (var i=0; i<characters.length; i++) {
